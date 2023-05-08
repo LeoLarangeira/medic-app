@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1683586772 source:d:\codeblocks\projetos\medic-app\functions.c
+	"functions.h"
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+
+1683587268 d:\codeblocks\projetos\medic-app\functions.h
+	<stdio.h>
+
+1683587763 source:d:\codeblocks\projetos\medic-app\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<locale.h>
+	"functions.h"
+
