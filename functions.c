@@ -30,14 +30,14 @@ void cadastraMedicos(Medico *medico, FILE *arq){
     if(arq = fopen("medico.csv","a")){
         system("CLS");
         printf("CPF: ");
-        scanf("%s", medico->cpf_medico);
+        fgets(medico->cpf_medico, sizeof(medico->cpf_medico), stdin);
         printf("Nome: ");
-        scanf("%s", medico->nome);
+        fgets(medico->nome, sizeof(medico->nome), stdin);
         printf("Telefone: ");
-        scanf("%s", medico->telefone);
+        fgets(medico->telefone, sizeof(medico->telefone),stdin);
         setlocale(LC_ALL, "Portuguese");
         printf("Endereço: ");
-        scanf("%s", medico->telefone);
+        fgets(medico->endereco, sizeof(medico->endereco),stdin);
         printf("Senha: ");
         scanf("%s", &senha1);
         printf("Vamos verificar novamente a senha: \n");
@@ -87,17 +87,17 @@ void cadastrarPaciente(Paciente *pacientes, int *totalPacientes, FILE *arq) {
     if (arq = fopen("paciente.csv", "a")) {
         system("CLS");
         printf("CPF: ");
-        scanf("%s", pacientes[*totalPacientes].cpf);
+        fgets(pacientes->cpf,sizeof(pacientes->cpf),stdin);
         printf("Nome: ");
-        scanf("%s", pacientes[*totalPacientes].nome);
+        fgets(pacientes->nome,sizeof(pacientes->nome),stdin);
         printf("Telefone: ");
-        scanf("%s", pacientes[*totalPacientes].telefone);
+        fgets(pacientes->telefone, sizeof(pacientes->telefone),stdin);
         printf("Endereco: ");
-        scanf("%s", pacientes[*totalPacientes].endereco);
+        fgets(pacientes->endereco,sizeof(pacientes->endereco),stdin);
         printf("Sexo: ");
-        scanf("%s", pacientes[*totalPacientes].sexo);
+        fgets(pacientes->sexo,sizeof(pacientes->sexo),stdin);
         printf("Data de Nascimento: ");
-        scanf("%s", pacientes[*totalPacientes].data_nascimento);
+        fgets(pacientes->data_nascimento,sizeof(pacientes->data_nascimento),stdin);
         (*totalPacientes)++;
         printf("Paciente cadastrado com sucesso!\n");
         fprintf(arq, "%s,%s,%s,%s,%s,%s\n", pacientes[*totalPacientes - 1].cpf, pacientes[*totalPacientes - 1].nome,
@@ -168,15 +168,15 @@ void cadastrar_relatorio(Relatorio *relatorio, FILE *arq){
 
         system("CLS");
         printf("CPF do Paciente: \n");
-        scanf("%s", relatorio->cpf_paciente);
+        fgets(relatorio->cpf_paciente,sizeof(relatorio->cpf_paciente),stdin);
         printf("Data de Nascimento: \n");
-        scanf("%s", relatorio->data);
+        fgets(relatorio->data,sizeof(relatorio->data),stdin);
         printf("Causa: \n");
-        scanf("%s",relatorio->causa);
+        fgets(relatorio->causa,sizeof(relatorio->causa),stdin);
         printf("Sintomas: \n");
-        scanf("%s",relatorio->sintoma);
+        fgets(relatorio->sintoma,sizeof(relatorio->sintoma),stdin);
         printf("Medicamentos: \n");
-        scanf("%s", relatorio->medicamentos);
+        fgets(relatorio->medicamentos,sizeof(relatorio->medicamentos),stdin);
 
         fprintf(arq,"%s,%s,%s,%s,%s\n",relatorio->cpf_paciente,relatorio->data,relatorio->causa,relatorio->sintoma,relatorio->medicamentos);
 
