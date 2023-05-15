@@ -5,6 +5,80 @@
 #define MAX_PACIENTES 100
 #define MAX_LINE_SIZE 1024
 
+//função para verificar se duas senhas são iguais
+int verificaSenha(char *senha1,char *senha2){
+    if(strcmp(senha1,senha2) == 0 ){
+        return 1;
+    }else{
+        //caso sejam diferentes, é solicitado que o usuário digite as senhas
+        setlocale(LC_ALL,"Portuguese");
+        printf("Senhas não compativeis\n");
+        printf("Senha: ");
+        scanf("%s",senha1);
+        printf("Digite novamenta a senha: ");
+        scanf("%s", senha2);
+        //Chama a função novamente para verificar as novas senhas inseridas
+        verificaSenha(senha1,senha2);
+    }
+}
+
+//função para cadastrar os médicos
+void cadastraMedicos(Medico *medico, FILE *arq){
+//posteriomente usar o fgets para poder ler de forma mais segura!
+    char senha1[8];
+    char senha2[8];
+    if(arq = fopen("medico.csv","a")){
+        system("CLS");
+        printf("CPF: ");
+        scanf("%s", medico->cpf_medico);
+        printf("Nome: ");
+        scanf("%s", medico->nome);
+        printf("Telefone: ");
+        scanf("%s", medico->telefone);
+        setlocale(LC_ALL, "Portuguese");
+        printf("Endereço: ");
+        scanf("%s", medico->telefone);
+        printf("Senha: ");
+        scanf("%s", &senha1);
+        printf("Vamos verificar novamente a senha: \n");
+        printf("Digite novamente a senha: ");
+        scanf("%s",&senha2);
+        if(verificaSenha(senha1,senha2) == 1){
+            strcpy(medico->senha, senha1);
+            fprintf(arq,"%s,%s,%s,%s,%s",medico->cpf_medico,medico->senha,medico->nome,medico->telefone,medico->endereco);
+            printf("Medico cadastrado com sucesso\n");
+            fclose(arq);
+        }
+
+    }
+
+}
+void loginMedico(Medico *medico, FILE *arq){
+    char cpf_medico[12], senha[8];
+    int encontrado = 0;
+    if(arq == fopen("medico.csv","r")){
+        printf("CPF: ");
+        scanf("%s", cpf_medico);
+        printf("Senha: ");
+        scanf("%s", senha);
+        while(fscanf(arq,"%[^,],%[^,],%[^,],%[^,],%[^\n]",medico->cpf_medico,medico->senha,medico->nome,medico->telefone,medico->endereco) != EOF){
+            if(strcmp(medico->cpf_medico, cpf_medico) == 0 && strcmp(medico->senha, senha) == 0){
+                encontrado = 1;
+                break;
+            }
+        }
+        if(encontrado){
+            printf("Bem-vindo: %c", medico->nome);
+        }else{
+            setlocale(LC_ALL,"Portuguese");
+            printf("Senha ou usuários inválidos!");
+        }
+        fclose(arq);
+    }else{
+        printf("Erro ao abrir o arquivo!\n");
+    }
+
+}
 void cadastrarPaciente(Paciente *pacientes, int *totalPacientes, FILE *arq) {
     if (*totalPacientes == MAX_PACIENTES) {
         printf("Nao e possivel cadastrar mais pacientes\n");
@@ -82,7 +156,11 @@ void deletar_paciente(Paciente *paciente, FILE *arq){
     printf("Funcao em construcao\n");
 }
 void editar_paciente(Paciente *paciente, FILE *arq){
-    printf("Funcao em construcao\n");
+    //isso aqui com banco de dados seria muito mais facil e pratico viu, vou mentir não.
+    int opcao;
+    setlocale(LC_ALL,"Portuguese");
+    printf("Você está no menu de edição de dados de pacientes: ");
+
 }
 void cadastrar_relatorio(Relatorio *relatorio, FILE *arq){
 

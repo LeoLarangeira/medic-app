@@ -23,20 +23,23 @@ typedef struct{
 }Relatorio;
 
 typedef struct{
-    int crm;
+    char cpf_medico[12];
     char nome[50];
     char telefone[20];
     char endereco[100];
     char senha[8];
 }Medico;
 
-void cadastrarPaciente(Paciente *pacientes, int *totalPacientes, FILE *arq);
-void exibirPacientes(Paciente *pacientes, int totalPacientes, FILE *arq);
-int pesquisarPaciente(Paciente *pacientes, int totalPacientes, FILE *arq);
+
+void cadastraMedicos(Medico *medico, FILE *arq); //Feita
+void loginMedico(Medico *medico, FILE *arq); //Feita
+void cadastrarPaciente(Paciente *pacientes, int *totalPacientes, FILE *arq); //Feita
+void exibirPacientes(Paciente *pacientes, int totalPacientes, FILE *arq); // Feita
+int pesquisarPaciente(Paciente *pacientes, int totalPacientes, FILE *arq); //Feira
 void deletar_paciente(Paciente *paciente, FILE *arq);
 void editar_paciente(Paciente *paciente, FILE *arq);
-void cadastrar_relatorio(Relatorio *relatorio, FILE *arq);
-void exibir_relatorio(Relatorio *relatorio, FILE *arq);
+void cadastrar_relatorio(Relatorio *relatorio, FILE *arq); //Feita
+void exibir_relatorio(Relatorio *relatorio, FILE *arq); //Feita
 void editar_relatorio(Relatorio *relatorio, FILE *arq);
 void deletar_relatorio(Relatorio *relatorio, FILE *arq);
 
