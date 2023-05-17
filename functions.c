@@ -56,7 +56,7 @@ void cadastraMedicos(Medico *medico, FILE *arq){
 void loginMedico(Medico *medico, FILE *arq){
     char cpf_medico[12], senha[8];
     int encontrado = 0;
-    if(arq == fopen("medico.csv","r")){
+    if(arq = fopen("medico.csv","r")){
         printf("CPF: ");
         scanf("%s", cpf_medico);
         printf("Senha: ");
