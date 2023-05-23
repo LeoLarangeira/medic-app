@@ -52,18 +52,26 @@ int main() {
                                 while((c = getchar()) != '\n' && c != EOF);
                                 switch (opcao) {
                                 case 1:
+                                        printf("Insira os dados para cadastrar o paciente: ");
                                         cadastrarPaciente(pacientes, & totalPacientes, arq);
                                         break;
                                 case 2:
+                                        setlocale(LC_ALL,"Portuguese");
+                                        printf("EXIBIÇÃO DE PACIENTES: \n");
                                         exibirPacientes(pacientes, totalPacientes, arq);
                                         break;
                                 case 3:
+                                        printf("PESQUISA DE PACIENTES: \n");
                                         pesquisarPaciente(pacientes, totalPacientes, arq);
                                         break;
                                 case 4:
-                                        editar_paciente(pacientes, arq);
+                                        setlocale(LC_ALL,"Portuguese");
+                                        printf("EDIÇÃO DE PACIENTES");
+                                        editar_paciente(pacientes, arq, totalPacientes);
                                         break;
                                 case 5:
+                                        setlocale(LC_ALL,"Portuguese");
+                                        printf("EXCLUSÃO DE PACIENTES\n");
                                         deletar_paciente(pacientes, arq);
                                 case 6:
                                         break;
@@ -84,6 +92,8 @@ int main() {
                                         exibir_relatorio(relatorio, arq);
                                         break;
                                 case 3:
+                                        setlocale(LC_ALL,"Portuguese");
+                                        printf("Você está no menu de edição de relatórios: \n");
                                         editar_relatorio(relatorio, arq);
                                         break;
                                 case 4:

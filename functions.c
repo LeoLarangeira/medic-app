@@ -5,6 +5,7 @@
 #define MAX_PACIENTES 100
 #define MAX_LINE_SIZE 1024
 
+
 //função para verificar se duas senhas são iguais
 int verificaSenha(char *senha1,char *senha2){
     if(strcmp(senha1,senha2) == 0 ){
@@ -157,7 +158,7 @@ void deletar_paciente(Paciente *paciente, FILE *arq){
 
     //Lê o CPF a ser excluido
     setlocale(LC_ALL,"Portuguese");
-    printf("CPF a ser excluído: ");
+    printf("CPF: ");
     fgets(cpf_cliente, sizeof(cpf_cliente), stdin);
 
     //Abre o arquivo original em modo leitura
@@ -176,7 +177,7 @@ void deletar_paciente(Paciente *paciente, FILE *arq){
         return 1;
     }
 
-    char linha[MAX_LINE];
+    char linha[MAX_LINE_SIZE];
     int contadorLinhas = 0;
     int linhaExcluida = 0;
 
@@ -210,11 +211,88 @@ void deletar_paciente(Paciente *paciente, FILE *arq){
 
 
 }
-void editar_paciente(Paciente *paciente, FILE *arq){
-    //isso aqui com banco de dados seria muito mais facil e pratico viu, vou mentir não.
-    int opcao;
+void editar_paciente(Paciente *pacientes, FILE *arq, int totalPacientes){
+    char cpf_paciente[12];
+
+
+
+    printf("CPF: ");
+    fgets(cpf_paciente,sizeof(cpf_paciente),stdin);
     setlocale(LC_ALL,"Portuguese");
-    printf("Você está no menu de edição de dados de pacientes: ");
+    printf("CPF: ");
+    fgets(cpf_paciente, sizeof(cpf_paciente), stdin);
+
+    //Abre o arquivo original em modo leitura
+    FILE* arquivoOriginal = fopen("paciente.csv", "r");
+    if(arquivoOriginal == NULL){
+        printf("Erro ao abri o arquivo.\n");
+        return 1;
+    }
+
+    //Abre o arquivo temporário em modo escrita
+    FILE* arquivoTemporario = fopen("temp.csv", "w");
+    if(arquivoTemporario == NULL){
+        setlocale(LC_ALL,"Portuguese");
+        printf("Erro ao criar o arquivo temporário.\n");
+        fclose(arquivoOriginal);
+        return 1;
+    }
+
+    char linha[MAX_LINE_SIZE];
+    int contadorLinhas = 0;
+    int linhaExcluida = 0;
+
+    // Lê as linhas do arquivo original e as copia para o arquivo temporário
+    while (fgets(linha, sizeof(linha), arquivoOriginal) != NULL) {
+        if (!linhaExcluida && strstr(linha, cpf_paciente) != NULL) {
+            // Encontrou a linha a ser excluída
+            linhaExcluida = 1;
+            contadorLinhas = 0;
+        }
+
+        if (!linhaExcluida || contadorLinhas > 5) {
+            // Copia a linha para o arquivo temporário
+            fputs(linha, arquivoTemporario);
+        }
+
+        if (linhaExcluida) {
+            contadorLinhas++;
+            if (contadorLinhas > 5) {
+                // Reinicia o processo de cópia
+                linhaExcluida = 0;
+            }
+        }
+    }
+
+    fclose(arquivoOriginal);
+    fclose(arquivoTemporario);
+    remove("paciente.csv");
+    rename("temp.csv","paciente.csv");
+    setlocale(LC_ALL,"Portuguese");
+    printf("Dados para a edição:\n");
+    arq = fopen("paciente.csv","a");
+    if(!arq == NULL){
+        system("CLS");
+        printf("CPF: ");
+        fgets(pacientes->cpf,sizeof(pacientes->cpf),stdin);
+        printf("Nome: ");
+        fgets(pacientes->nome,sizeof(pacientes->nome),stdin);
+        printf("Telefone: ");
+        fgets(pacientes->telefone, sizeof(pacientes->telefone),stdin);
+        printf("Endereco: ");
+        fgets(pacientes->endereco,sizeof(pacientes->endereco),stdin);
+        printf("Sexo: ");
+        fgets(pacientes->sexo,sizeof(pacientes->sexo),stdin);
+        printf("Data de Nascimento: ");
+        fgets(pacientes->data_nascimento,sizeof(pacientes->data_nascimento),stdin);
+        (*totalPacientes)++;
+        printf("Paciente cadastrado com sucesso!\n");
+        fprintf(arq, "%s,%s,%s,%s,%s,%s\n", pacientes[*totalPacientes - 1].cpf, pacientes[*totalPacientes - 1].nome,
+                pacientes[*totalPacientes - 1].telefone, pacientes[*totalPacientes - 1].endereco, pacientes[*totalPacientes - 1].sexo,
+                pacientes[*totalPacientes - 1].data_nascimento);
+        fclose(arq);
+    }
+    printf("Dados atualizados com sucesso! \n");
 
 }
 void cadastrar_relatorio(Relatorio *relatorio, FILE *arq){
@@ -269,14 +347,14 @@ void exibir_relatorio(Relatorio *relatorio, FILE *arq){
 
 void editar_relatorio(Relatorio *relatorio, FILE *arq){
 
-    printf("Funcao em desenvolvimento\n");
+
 }
 void deletar_relatorio(Relatorio *relatorio, FILE *arq){
     char cpf_cliente[12];
 
     //Lê o CPF a ser excluido
     setlocale(LC_ALL,"Portuguese");
-    printf("CPF a ser excluído: ");
+    printf("CPF: \n");
     fgets(cpf_cliente, sizeof(cpf_cliente), stdin);
 
     //Abre o arquivo original em modo leitura
