@@ -18,9 +18,9 @@ int main() {
         Paciente pacientes[MAX_PACIENTES];
         FILE * arq;
         int totalPacientes = 0;
-        int opcao;
+        int opcao,c;
         char crm[MAX_CHAR], senha[MAX_CHAR];
-
+        setbuf(stdin,NULL);
         do {
                 printf("");
                 printf("1 - Entrar\n");
@@ -28,6 +28,7 @@ int main() {
                 printf("3 - Sair\n");
                 printf("Opcao: ");
                 scanf("%d", & opcao);
+                while((c = getchar()) != '\n' && c != EOF);
                 switch (opcao) {
                 case 1:
                         loginMedico(medico, arq);
@@ -36,7 +37,8 @@ int main() {
                         printf("2 - Menu Relatórios\n");
                         printf("3 - Sair\n");
                         printf("Opcao: ");
-                        scanf("%d", & opcao);
+                        scanf(" %d", &opcao);
+                        while((c = getchar()) != '\n' && c != EOF);
                         switch (opcao) {
                         case 1:
                                 system("CLS");
@@ -47,6 +49,7 @@ int main() {
                                 printf("5 - Excluir Paciente\n ");
                                 printf("6 - Sair\n");
                                 scanf("%d", & opcao);
+                                while((c = getchar()) != '\n' && c != EOF);
                                 switch (opcao) {
                                 case 1:
                                         cadastrarPaciente(pacientes, & totalPacientes, arq);
@@ -71,6 +74,7 @@ int main() {
                                 printf("3 - Editar Relatorio\n ");
                                 printf("4 - Excluir Relatorio\n ");
                                 printf("5 - Voltar\n");
+                                while((c = getchar()) != '\n' && c != EOF);
                                 scanf("%d", & opcao);
                                 switch (opcao) {
                                 case 1:
