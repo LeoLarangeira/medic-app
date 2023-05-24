@@ -211,14 +211,11 @@ void deletar_paciente(Paciente *paciente, FILE *arq){
 
 
 }
-void editar_paciente(Paciente *pacientes, FILE *arq, int totalPacientes){
+void editar_paciente(Paciente *pacientes, FILE *arq, int *totalPacientes){
     char cpf_paciente[12];
 
 
 
-    printf("CPF: ");
-    fgets(cpf_paciente,sizeof(cpf_paciente),stdin);
-    setlocale(LC_ALL,"Portuguese");
     printf("CPF: ");
     fgets(cpf_paciente, sizeof(cpf_paciente), stdin);
 
@@ -321,7 +318,7 @@ void exibir_relatorio(Relatorio *relatorio, FILE *arq){
     char cpf_paciente_busca[12], linha[MAX_LINE_SIZE];
     arq = fopen("relatorio.csv","r");
     if(arq == NULL){
-        printf("Impossivel abrir o relatório do paciente"\n);
+        printf("Impossivel abrir o relatório do paciente\n");
         return;
     }
     printf("CPF do Paciente que deseja buscar o relatório: ");
@@ -346,8 +343,77 @@ void exibir_relatorio(Relatorio *relatorio, FILE *arq){
 }
 
 void editar_relatorio(Relatorio *relatorio, FILE *arq){
+    char cpf_paciente[12];
 
+    printf("CPF: ");
+    fgets(cpf_paciente, sizeof(cpf_paciente), stdin);
+    setlocale(LC_ALL, "Portuguese");
 
+    //Abre o arquivo original em modo leitura
+    FILE* arquivoOriginal = fopen("relatorio.csv", "r");
+    if(arquivoOriginal == NULL){
+        printf("Erro ao abri o arquivo.\n");
+        return 1;
+    }
+
+    //Abre o arquivo temporário em modo escrita
+    FILE* arquivoTemporario = fopen("temp.csv", "w");
+    if(arquivoTemporario == NULL){
+        setlocale(LC_ALL,"Portuguese");
+        printf("Erro ao criar o arquivo temporário.\n");
+        fclose(arquivoOriginal);
+        return 1;
+    }
+
+    char linha[MAX_LINE_SIZE];
+    int contadorLinhas = 0;
+    int linhaExcluida = 0;
+
+    // Lê as linhas do arquivo original e as copia para o arquivo temporário
+    while (fgets(linha, sizeof(linha), arquivoOriginal) != NULL) {
+        if (!linhaExcluida && strstr(linha, cpf_paciente) != NULL) {
+            // Encontrou a linha a ser excluída
+            linhaExcluida = 1;
+            contadorLinhas = 0;
+        }
+
+        if (!linhaExcluida || contadorLinhas > 5) {
+            // Copia a linha para o arquivo temporário
+            fputs(linha, arquivoTemporario);
+        }
+
+        if (linhaExcluida) {
+            contadorLinhas++;
+            if (contadorLinhas > 5) {
+                // Reinicia o processo de cópia
+                linhaExcluida = 0;
+            }
+        }
+    }
+
+    fclose(arquivoOriginal);
+    fclose(arquivoTemporario);
+    remove("relatorio.csv");
+    rename("temp.csv","relatorio.csv");
+
+    if (arq = fopen("relatorio.csv", "a")){
+
+        system("CLS");
+        printf("CPF do Paciente: \n");
+        fgets(relatorio->cpf_paciente,sizeof(relatorio->cpf_paciente),stdin);
+        printf("Data de Nascimento: \n");
+        fgets(relatorio->data,sizeof(relatorio->data),stdin);
+        printf("Causa: \n");
+        fgets(relatorio->causa,sizeof(relatorio->causa),stdin);
+        printf("Sintomas: \n");
+        fgets(relatorio->sintoma,sizeof(relatorio->sintoma),stdin);
+        printf("Medicamentos: \n");
+        fgets(relatorio->medicamentos,sizeof(relatorio->medicamentos),stdin);
+
+        fprintf(arq,"%s,%s,%s,%s,%s\n",relatorio->cpf_paciente,relatorio->data,relatorio->causa,relatorio->sintoma,relatorio->medicamentos);
+
+        fclose(arq);
+    }
 }
 void deletar_relatorio(Relatorio *relatorio, FILE *arq){
     char cpf_cliente[12];
@@ -373,7 +439,7 @@ void deletar_relatorio(Relatorio *relatorio, FILE *arq){
         return 1;
     }
 
-    char linha[MAX_LINE];
+    char linha[MAX_LINE_SIZE];
     int contadorLinhas = 0;
     int linhaExcluida = 0;
 
