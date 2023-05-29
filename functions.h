@@ -32,7 +32,7 @@ typedef struct{
 
 
 void cadastraMedicos(Medico *medico, FILE *arq); //Feita
-void loginMedico(Medico *medico, FILE *arq); //Feita
+int loginMedico(const char *cpf_medico,const char *senha); //Feita
 void cadastrarPaciente(Paciente *pacientes, int *totalPacientes, FILE *arq); //Feita
 void exibirPacientes(Paciente *pacientes, int totalPacientes, FILE *arq); // Feita
 int pesquisarPaciente(Paciente *pacientes, int totalPacientes, FILE *arq); //Feira
