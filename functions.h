@@ -36,7 +36,7 @@ int loginMedico(const char *cpf_medico,const char *senha);
 void cadastrarPaciente(Paciente *pacientes, int *totalPacientes, FILE *arq); 
 void exibirPacientes(Paciente *pacientes, int totalPacientes, FILE *arq); 
 int pesquisarPaciente(Paciente *pacientes, int totalPacientes, FILE *arq); 
-void deletar_paciente(Paciente *paciente, FILE *arq);// Feita
+void deletar_paciente(Paciente *paciente, FILE *arq);
 void editar_paciente(Paciente *pacientes, FILE *arq, int *totalPacientes); 
 void cadastrar_relatorio(Relatorio *relatorio, FILE *arq); 
 void exibir_relatorio(Relatorio *relatorio, FILE *arq); 
