@@ -96,7 +96,7 @@ int main() {
                                 printf("5 - Excluir Paciente\n ");
                                 printf("6 - Sair\n");
                                 scanf("%d", & opcao);
-                                while((c = getchar()) != '\n' && c != EOF);
+
                                 switch (opcao) {
                                 case 1:
                                         printf("Insira os dados para cadastrar o paciente: ");
@@ -130,7 +130,7 @@ int main() {
                                 printf("3 - Editar Relatorio\n");
                                 printf("4 - Excluir Relatorio\n");
                                 printf("5 - Sair\n");
-                                while((c = getchar()) != '\n' && c != EOF);
+
                                 scanf("%d", & opcao);
                                 switch (opcao) {
                                 case 1:

@@ -68,16 +68,22 @@ void cadastrarPaciente(Paciente *pacientes, int *totalPacientes, FILE *arq) {
         system("CLS");
         printf("CPF: ");
         fgets(pacientes->cpf,sizeof(pacientes->cpf),stdin);
+        pacientes->cpf[strcspn(pacientes->cpf, "\n")] = '\0';
         printf("Nome: ");
         fgets(pacientes->nome,sizeof(pacientes->nome),stdin);
+        pacientes->nome[strcspn(pacientes->nome, "\n")] = '\0';
         printf("Telefone: ");
         fgets(pacientes->telefone, sizeof(pacientes->telefone),stdin);
+        pacientes->telefone[strcspn(pacientes->telefone, "\n")] = '\0';
         printf("Endereco: ");
         fgets(pacientes->endereco,sizeof(pacientes->endereco),stdin);
+        pacientes->endereco[strcspn(pacientes->endereco, "\n")] = '\0';
         printf("Sexo: ");
         fgets(pacientes->sexo,sizeof(pacientes->sexo),stdin);
+        pacientes->sexo[strcspn(pacientes->sexo, "\n")] = '\0';
         printf("Data de Nascimento: ");
         fgets(pacientes->data_nascimento,sizeof(pacientes->data_nascimento),stdin);
+        pacientes->data_nascimento[strcspn(pacientes->data_nascimento, "\n")] = '\0';
         (*totalPacientes)++;
         printf("Paciente cadastrado com sucesso!\n");
         fprintf(arq, "%s,%s,%s,%s,%s,%s\n", pacientes[*totalPacientes - 1].cpf, pacientes[*totalPacientes - 1].nome,
@@ -251,18 +257,23 @@ void editar_paciente(Paciente *pacientes, FILE *arq, int *totalPacientes){
         system("CLS");
         printf("CPF: ");
         fgets(pacientes->cpf,sizeof(pacientes->cpf),stdin);
+        pacientes->cpf[strcspn(pacientes->cpf, "\n")] = '\0';
         printf("Nome: ");
         fgets(pacientes->nome,sizeof(pacientes->nome),stdin);
+        pacientes->nome[strcspn(pacientes->nome, "\n")] = '\0';
         printf("Telefone: ");
         fgets(pacientes->telefone, sizeof(pacientes->telefone),stdin);
+        pacientes->telefone[strcspn(pacientes->telefone, "\n")] = '\0';
         printf("Endereco: ");
         fgets(pacientes->endereco,sizeof(pacientes->endereco),stdin);
+        pacientes->endereco[strcspn(pacientes->endereco, "\n")] = '\0';
         printf("Sexo: ");
         fgets(pacientes->sexo,sizeof(pacientes->sexo),stdin);
+        pacientes->sexo[strcspn(pacientes->sexo, "\n")] = '\0';
         printf("Data de Nascimento: ");
         fgets(pacientes->data_nascimento,sizeof(pacientes->data_nascimento),stdin);
-        (*totalPacientes)++;
-        printf("Paciente cadastrado com sucesso!\n");
+        pacientes->data_nascimento[strcspn(pacientes->data_nascimento, "\n")] = '\0';
+        printf("Paciente editado com sucesso!\n");
         fprintf(arq, "%s,%s,%s,%s,%s,%s\n", pacientes[*totalPacientes - 1].cpf, pacientes[*totalPacientes - 1].nome,
                 pacientes[*totalPacientes - 1].telefone, pacientes[*totalPacientes - 1].endereco, pacientes[*totalPacientes - 1].sexo,
                 pacientes[*totalPacientes - 1].data_nascimento);
@@ -278,15 +289,20 @@ void cadastrar_relatorio(Relatorio *relatorio, FILE *arq){
         system("CLS");
         printf("CPF do Paciente: \n");
         fgets(relatorio->cpf_paciente,sizeof(relatorio->cpf_paciente),stdin);
+        relatorio->cpf_paciente[strcspn(relatorio->cpf_paciente, "\n")] = '\0';
         printf("Data de Nascimento: \n");
         fgets(relatorio->data,sizeof(relatorio->data),stdin);
+        relatorio->data[strcspn(relatorio->data, "\n")] = '\0';
         printf("Causa: \n");
         fgets(relatorio->causa,sizeof(relatorio->causa),stdin);
+        relatorio->causa[strcspn(relatorio->causa, "\n")] = '\0';
         printf("Sintomas: \n");
         fgets(relatorio->sintoma,sizeof(relatorio->sintoma),stdin);
+        relatorio->sintoma[strcspn(relatorio->sintoma, "\n")] = '\0';
         printf("Medicamentos: \n");
         fgets(relatorio->medicamentos,sizeof(relatorio->medicamentos),stdin);
-
+        relatorio->medicamentos[strcspn(relatorio->medicamentos, "\n")] = '\0';
+        printf("Relatorio cadastrado com sucesso! \n");
         fprintf(arq,"%s,%s,%s,%s,%s\n",relatorio->cpf_paciente,relatorio->data,relatorio->causa,relatorio->sintoma,relatorio->medicamentos);
 
         fclose(arq);
@@ -377,17 +393,23 @@ void editar_relatorio(Relatorio *relatorio, FILE *arq){
 
     if (arq = fopen("relatorio.csv", "a")){
 
-        system("CLS");
+       system("CLS");
         printf("CPF do Paciente: \n");
         fgets(relatorio->cpf_paciente,sizeof(relatorio->cpf_paciente),stdin);
+        relatorio->cpf_paciente[strcspn(relatorio->cpf_paciente, "\n")] = '\0';
         printf("Data de Nascimento: \n");
         fgets(relatorio->data,sizeof(relatorio->data),stdin);
+        relatorio->data[strcspn(relatorio->data, "\n")] = '\0';
         printf("Causa: \n");
         fgets(relatorio->causa,sizeof(relatorio->causa),stdin);
+        relatorio->causa[strcspn(relatorio->causa, "\n")] = '\0';
         printf("Sintomas: \n");
         fgets(relatorio->sintoma,sizeof(relatorio->sintoma),stdin);
+        relatorio->sintoma[strcspn(relatorio->sintoma, "\n")] = '\0';
         printf("Medicamentos: \n");
         fgets(relatorio->medicamentos,sizeof(relatorio->medicamentos),stdin);
+        relatorio->medicamentos[strcspn(relatorio->medicamentos, "\n")] = '\0';
+        printf("Relatorio editado com sucesso! \n");
 
         fprintf(arq,"%s,%s,%s,%s,%s\n",relatorio->cpf_paciente,relatorio->data,relatorio->causa,relatorio->sintoma,relatorio->medicamentos);
 
