@@ -31,16 +31,16 @@ typedef struct{
 }Medico;
 
 
-void cadastraMedicos(Medico *medico, FILE *arq); //Feita
-int loginMedico(const char *cpf_medico,const char *senha); //Feita
-void cadastrarPaciente(Paciente *pacientes, int *totalPacientes, FILE *arq); //Feita
-void exibirPacientes(Paciente *pacientes, int totalPacientes, FILE *arq); // Feita
-int pesquisarPaciente(Paciente *pacientes, int totalPacientes, FILE *arq); //Feira
+void cadastraMedicos(Medico *medico, FILE *arq); 
+int loginMedico(const char *cpf_medico,const char *senha); 
+void cadastrarPaciente(Paciente *pacientes, int *totalPacientes, FILE *arq); 
+void exibirPacientes(Paciente *pacientes, int totalPacientes, FILE *arq); 
+int pesquisarPaciente(Paciente *pacientes, int totalPacientes, FILE *arq); 
 void deletar_paciente(Paciente *paciente, FILE *arq);// Feita
-void editar_paciente(Paciente *pacientes, FILE *arq, int *totalPacientes); //Feita
-void cadastrar_relatorio(Relatorio *relatorio, FILE *arq); //Feita
-void exibir_relatorio(Relatorio *relatorio, FILE *arq); //Feita
+void editar_paciente(Paciente *pacientes, FILE *arq, int *totalPacientes); 
+void cadastrar_relatorio(Relatorio *relatorio, FILE *arq); 
+void exibir_relatorio(Relatorio *relatorio, FILE *arq); 
 void editar_relatorio(Relatorio *relatorio, FILE *arq);
-void deletar_relatorio(Relatorio *relatorio, FILE *arq); //Feita
+void deletar_relatorio(Relatorio *relatorio, FILE *arq); 
 
 #endif // FUNCTIONS_H_INCLUDED
