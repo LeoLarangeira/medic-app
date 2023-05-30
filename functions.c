@@ -60,6 +60,8 @@ void cadastraMedicos(Medico *medico, FILE *arq){
 }
 
 void cadastrarPaciente(Paciente *pacientes, int *totalPacientes, FILE *arq) {
+    int c;
+    while((c = getchar()) != '\n' && c != EOF);
     if (*totalPacientes == MAX_PACIENTES) {
         printf("Nao e possivel cadastrar mais pacientes\n");
         return;
@@ -283,7 +285,8 @@ void editar_paciente(Paciente *pacientes, FILE *arq, int *totalPacientes){
 
 }
 void cadastrar_relatorio(Relatorio *relatorio, FILE *arq){
-
+    int c;
+    while((c = getchar()) != '\n' && c != EOF);
     if (arq = fopen("relatorio.csv", "a")){
 
         system("CLS");
